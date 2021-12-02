@@ -1,3 +1,5 @@
+package day1
+
 val input_task1 = """
 157
 158
