@@ -4,7 +4,16 @@ package day2/*
  *
  */
 
-val input_task1 = """
+val demo_input = """
+    forward 5
+    down 5
+    forward 8
+    up 3
+    down 8
+    forward 2
+""".trimIndent()
+
+val input = """
     forward 2
     forward 2
     down 7
