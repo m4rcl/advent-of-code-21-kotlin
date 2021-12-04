@@ -48,8 +48,54 @@ class Day3 {
     }
 
     @Test
-    fun what_do_you_get_if_you_multiply_your_final_horizontal_position_by_your_final_depth_aim() {
+    fun what_is_the_life_support_rating_of_the_submarine() {
 
+        val resultList = input.lines()
 
+        val oxygenRate = Integer.parseInt(findOxygenRate(resultList).first(), 2)
+        println("oxygenRate: $oxygenRate")
+
+        val co2Rate = Integer.parseInt(findCo2Rate(resultList).first(), 2)
+        println("co2Rate: $co2Rate")
+
+        println("Result: ${oxygenRate * co2Rate}")
     }
+
+    private fun findOxygenRate(list: List<String>, index: Int = 0): List<String> {
+
+        println("findOxygenRate: $list index: $index")
+
+        val oneList = ArrayList<String>()
+        val zeroList = ArrayList<String>()
+
+        list.forEach { value ->
+            if (value[index] == '1') oneList.add(value) else zeroList.add(value)
+        }
+
+        val resultList = if (oneList.count() >= zeroList.count()) oneList else zeroList
+
+        if (resultList.count() == 1) return resultList
+
+        return findOxygenRate(resultList, index + 1)
+    }
+
+
+    private fun findCo2Rate(list: List<String>, index: Int = 0): List<String> {
+
+        println("findCo2Rate: $list index: $index")
+
+        val oneList = ArrayList<String>()
+        val zeroList = ArrayList<String>()
+
+        list.forEach { value ->
+            if (value[index] == '1') oneList.add(value) else zeroList.add(value)
+        }
+
+        val resultList = if (zeroList.count() <= oneList.count()) zeroList else oneList
+
+        if (resultList.count() == 1) return resultList
+
+        return findCo2Rate(resultList, index + 1)
+    }
+
 }
