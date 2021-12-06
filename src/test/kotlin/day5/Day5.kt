@@ -19,10 +19,13 @@ class Day5 {
             val vertical = from.first == to.first
             val horizontal = from.second == to.second
 
-            if (vertical) {
-                val yFrom = from.second
-                val yTo = to.second
+            val yFrom = from.second
+            val xFrom = from.first
 
+            val yTo = to.second
+            val xTo = to.first
+
+            if (vertical) {
                 if (yFrom > yTo) {
                     for (yValue in yFrom downTo yTo) {
                         field[yValue][from.first] += 1
@@ -35,9 +38,6 @@ class Day5 {
 
             } else {
                 if (horizontal) {
-                    val xFrom = from.first
-                    val xTo = to.first
-
                     if (xFrom > xTo) {
                         for (xValue in xFrom downTo xTo) {
                             field[from.second][xValue] += 1
@@ -47,16 +47,33 @@ class Day5 {
                             field[from.second][xValue] += 1
                         }
                     }
+                } else { //diagonal
+
+                    val yDown = yFrom > yTo
+                    val xDown = xFrom > xTo
+
+                    var y = yFrom
+                    var x = xFrom
+
+                    while (y != yTo || x != xTo) {
+
+                        field[y][x] += 1
+                        if (yDown) --y else ++y
+                        if (xDown) --x else ++x
+                    }
+
+                    field[yTo][xTo] += 1
+
                 }
             }
         }
 
-        for (ints in field) {
-            for (value in ints) {
-                print(value)
-            }
-            println("\n")
-        }
+//        for (ints in field) {
+//            for (value in ints) {
+//                print(value)
+//            }
+//            println("\n")
+//        }
 
         var resultCount = 0
 
